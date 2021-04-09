@@ -16,6 +16,7 @@ public class Bar extends JPanel{
 			Color color = JColorChooser.showDialog(canvas, "Choose color", canvas.getCurrentColor());
 			canvas.changeCurrentColor(color);
 			colorChooser.repaint();
+			canvas.repaint();
 		}
 	}
 

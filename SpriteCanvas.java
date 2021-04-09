@@ -6,16 +6,32 @@ import java.lang.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
+class GPencil extends GTool{
+	public GPencil(SpriteCanvas canvas){
+		super(canvas);
+	}
+
+	@Override
+	public void update(){
+		if(getMouseState()){
+			canvas.putPixel(current_x, current_y);
+		}
+	}
+}
+
 public class SpriteCanvas extends JPanel{
 	private int internal_width, internal_height;
 	private boolean isMouseOn;
 	private Timer timer;
 	private Canvas canvas;
+	private GTool current_tool;
 
 	public SpriteCanvas(int w, int h, Canvas canvas){
 		internal_width = w;
 		internal_height = h;
 		this.canvas = canvas;
+
+		current_tool = new GPencil(this);
 
 		addMouseListener(new input());
 
@@ -53,9 +69,11 @@ public class SpriteCanvas extends JPanel{
 		g.drawLine(0, height/2, width, height/2);
 	}
 
-	private void putPixel(int x, int y){
+	public void putPixel(int x, int y){
 		int width = getWidth();
 		int height = getHeight();
+
+		if(x >= width || y >= height || x < 0 || y < 0) return;
 
 		x = x*internal_width/width;
 		y = y*internal_height/height;
@@ -64,13 +82,12 @@ public class SpriteCanvas extends JPanel{
 	}
 
 	private void updateMouse(){
-		if(!isMouseOn) return;
-
 		PointerInfo a = MouseInfo.getPointerInfo();
 		Point b = a.getLocation();
 		SwingUtilities.convertPointFromScreen(b, this);
 		
-		putPixel((int) b.getX(), (int) b.getY());
+		current_tool.setCurrentPosition((int) b.getX(), (int) b.getY());
+		current_tool.update();
 	}
 
 	private class updateLoop extends TimerTask{
@@ -99,11 +116,15 @@ public class SpriteCanvas extends JPanel{
 		@Override
 		public void mousePressed(MouseEvent e){
 			isMouseOn = true;
+			current_tool.setInitialPosition(e.getX(), e.getY());
+			current_tool.setMouseState(true);
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e){
 			isMouseOn = false;
+			current_tool.setEndPosition(e.getX(), e.getY());
+			current_tool.setMouseState(false);
 		}
 	}
 
