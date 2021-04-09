@@ -33,6 +33,9 @@ public class ColorChooser extends JPanel{
 
 		g.setColor(Color.white);
 		g.drawRect(current_color*height, 0, height, height);
+
+		g.drawLine(current_color*height, 0, current_color*height+height, height);
+		g.drawLine(current_color*height, height, current_color*height+height, 0);
 	}
 
 	private void resizeCanvas(){
