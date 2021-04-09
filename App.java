@@ -18,7 +18,7 @@ public class App{
 
 		Menu menu = new Menu(canvasframe.getCanvas());
 
-		Bar bar = new Bar(canvasframe.getCanvas());
+		Bar bar = new Bar(canvasframe.getCanvas(), canvasframe.getSpriteCanvas());
 
 		frame.add(menu, BorderLayout.PAGE_START);
 		frame.add(scroll, BorderLayout.LINE_START);

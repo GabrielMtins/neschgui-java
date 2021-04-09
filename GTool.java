@@ -50,4 +50,7 @@ public class GTool{
 
 	public void update(){
 	}
+
+	public void render(Graphics g){
+	}
 }
