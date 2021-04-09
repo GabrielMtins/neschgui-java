@@ -27,7 +27,6 @@ public class Canvas extends JPanel{
 	private Color []palette;
 	private JScrollBar scroll;
 
-	private boolean isMouseOn;
 	private int current_color;
 
 	private Timer timer;
@@ -51,7 +50,7 @@ public class Canvas extends JPanel{
 		rom = new Rom();
 
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new updateLoop(), 100, 50);
+		timer.scheduleAtFixedRate(new updateLoop(), 100, 25);
 	}
 
 	public void setScroll(JScrollBar s){
@@ -118,6 +117,8 @@ public class Canvas extends JPanel{
 		int sprite_x = x/sprite_size;
 		int sprite_y = y/sprite_size;
 		
+		if(sprite_x < 0) sprite_x = 0;
+		if(sprite_y < 0) sprite_y = 0;
 		if(sprite_x > num_of_sprite-2) sprite_x = num_of_sprite-2;
 		if(sprite_y > num_of_sprite-2) sprite_y = num_of_sprite-2;
 
@@ -221,7 +222,6 @@ public class Canvas extends JPanel{
 		@Override
 		public void run(){
 			resizeCanvas();
-			updateMouse();
 			if(getCurrentOffset() != old_offset){
 				repaint();
 				old_offset = getCurrentOffset();
@@ -240,16 +240,6 @@ public class Canvas extends JPanel{
 		}
 	}
 
-	private void updateMouse(){
-		if(!isMouseOn) return;
-
-		PointerInfo a = MouseInfo.getPointerInfo();
-		Point b = a.getLocation();
-		SwingUtilities.convertPointFromScreen(b, this);
-		
-		selectSprite((int) b.getX(), (int) b.getY());
-	}
-
 	private class input implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent e){
@@ -265,12 +255,11 @@ public class Canvas extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e){
-			isMouseOn = true;
+			selectSprite(e.getX(), e.getY());
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e){
-			isMouseOn = false;
 		}
 	}
 

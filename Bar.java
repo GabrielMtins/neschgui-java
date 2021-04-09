@@ -12,11 +12,12 @@ public class Bar extends JPanel{
 
 	private class onChangeColor implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			JColorChooser chooser = new JColorChooser();
 			Color color = JColorChooser.showDialog(canvas, "Choose color", canvas.getCurrentColor());
-			canvas.changeCurrentColor(color);
-			colorChooser.repaint();
-			canvas.repaint();
+			if(color != null){
+				canvas.changeCurrentColor(color);
+				colorChooser.repaint();
+				canvas.repaint();
+			}
 		}
 	}
 
