@@ -18,6 +18,8 @@ public class ColorChooser extends JPanel{
 	}
 
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+
 		resizeCanvas();
 
 		int width = getWidth();

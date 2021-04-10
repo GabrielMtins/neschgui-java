@@ -199,6 +199,8 @@ public class Canvas extends JPanel{
 	}
 
 	public void paintComponent(Graphics g){
+		//super.paintComponent(g);
+
 		Graphics2D g2d = (Graphics2D) g;
 
 		int width = getWidth();
