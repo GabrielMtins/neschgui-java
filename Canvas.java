@@ -16,8 +16,6 @@ public class Canvas extends JPanel{
 	private int selected_sprite_y;
 	private int selected_sprite_offset;
 
-	private boolean repaint_only_current_sprite;
-
 	private int old_offset;
 
 	private int sprite_size;
@@ -148,7 +146,6 @@ public class Canvas extends JPanel{
 		if(y >= sprite_size) y -= sprite_size;
 
 		rom.putPixel(x, y, selected_sprite + offset, current_color);
-		repaint_only_current_sprite = true;
 		repaint();
 	}
 
@@ -199,7 +196,7 @@ public class Canvas extends JPanel{
 	}
 
 	public void paintComponent(Graphics g){
-		//super.paintComponent(g);
+		super.paintComponent(g);
 
 		Graphics2D g2d = (Graphics2D) g;
 
@@ -210,20 +207,10 @@ public class Canvas extends JPanel{
 
 		g2d.scale((double) width / internal_width, (double) height / internal_height);
 
-		if(repaint_only_current_sprite){
-			drawSprite(g2d, selected_sprite_x, selected_sprite_y, offset);
-			drawSprite(g2d, selected_sprite_x+1, selected_sprite_y, offset);
-			drawSprite(g2d, selected_sprite_x, selected_sprite_y+1, offset);
-			drawSprite(g2d, selected_sprite_x+1, selected_sprite_y+1, offset);
+		g.setColor(palette[0]);
+		g.fillRect(0, 0, width, height);
 
-			repaint_only_current_sprite = false;
-		}
-		else{
-			g.setColor(palette[0]);
-			g.fillRect(0, 0, width, height);
-
-			drawAllSprites(g2d, offset);
-		}
+		drawAllSprites(g2d, offset);
 
 		// draw outlines
 		g2d.setColor(Color.white);
