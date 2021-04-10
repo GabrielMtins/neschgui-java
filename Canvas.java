@@ -59,6 +59,7 @@ public class Canvas extends JPanel{
 		selected_sprite_x = 0;
 		selected_sprite_y = 0;
 		selected_sprite_offset = 0;
+		selected_sprite = 0;
 
 		rom = new Rom();
 		scroll.setValue(0);
@@ -87,6 +88,7 @@ public class Canvas extends JPanel{
 		selected_sprite_x = 0;
 		selected_sprite_y = 0;
 		selected_sprite_offset = 0;
+		selected_sprite = 0;
 
 		JFileChooser chooser = new JFileChooser();
 		int return_val = chooser.showOpenDialog(this);
