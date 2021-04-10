@@ -65,7 +65,7 @@ public class Bar extends JPanel{
 		button.addActionListener(new onChangePaste());
 		toolBar.add(button);
 
+		toolBar.add(colorChooser);
 		add(toolBar);
-		add(colorChooser);
 	}
 }
