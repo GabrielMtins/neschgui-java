@@ -47,6 +47,8 @@ class GPaste extends GTool{
 				e.printStackTrace();
 			}
 
+			if(to_copy == null || to_copy.length() < 64) return;
+
 			int before_color = c.getCurrentColorID();
 
 			int sprite_x = current_x*2/canvas.getWidth();
