@@ -38,6 +38,12 @@ public class Menu extends JMenuBar{
 		}
 	}
 
+	private class onHelpEvent implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			JOptionPane.showMessageDialog(canvas.getParent(), "Neschgui");
+		}
+	}
+
 	public Menu(Canvas canvas){
 		JMenu menu = new JMenu("File");
 		this.canvas = canvas;
@@ -63,6 +69,13 @@ public class Menu extends JMenuBar{
 		menu.add(item);
 
 		add(menu);
-		add(new JMenu("About"));
+
+		menu = new JMenu("Help");
+
+		item = new JMenuItem("About");
+		item.addActionListener(new onHelpEvent());
+		menu.add(item);
+
+		add(menu);
 	}
 }

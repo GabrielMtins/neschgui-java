@@ -46,6 +46,12 @@ public class ColorChooser extends JPanel{
 		setSize(new Dimension(getHeight()*4, getHeight()));
 	}
 
+	public void setCurrentColor(int color_id){
+		current_color = color_id;
+		canvas.setCurrentColor(color_id);
+		repaint();
+	}
+
 	private class input implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent e){
@@ -61,9 +67,7 @@ public class ColorChooser extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e){
-			current_color = e.getX() / getHeight();
-			canvas.setCurrentColor(current_color);
-			repaint();
+			setCurrentColor(e.getX() / getHeight());
 		}
 
 		@Override
