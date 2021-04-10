@@ -100,6 +100,10 @@ public class Canvas extends JPanel{
 		return palette[current_color];
 	}
 
+	public int getCurrentColorID(){
+		return current_color;
+	}
+
 	public void changeCurrentColor(Color c){
 		palette[current_color] = c;
 		repaint();

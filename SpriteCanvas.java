@@ -29,6 +29,8 @@ class GPaste extends GTool{
 				e.printStackTrace();
 			}
 
+			int before_color = c.getCurrentColorID();
+
 			int sprite_x = current_x*2/canvas.getWidth();
 			int sprite_y = current_y*2/canvas.getHeight();
 
@@ -39,6 +41,8 @@ class GPaste extends GTool{
 					c.putPixelOnCurrentSprite(i + sprite_x*8, j + sprite_y*8);
 				}
 			}
+			
+			c.setCurrentColor(before_color);
 		}
 	}
 
