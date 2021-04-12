@@ -55,41 +55,41 @@ public class Bar extends JPanel{
 	}
 
 	private void setUpKeyBindings(){
-		getInputMap().put(KeyStroke.getKeyStroke("C"), "copy");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("C"), "copy");
 		getActionMap().put("copy", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ onChangeCopy(); }
 		});
 
-		getInputMap().put(KeyStroke.getKeyStroke("V"), "paste");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("V"), "paste");
 		getActionMap().put("paste", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ onChangePaste(); }
 		});
 
-		getInputMap().put(KeyStroke.getKeyStroke("B"), "pencil");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("B"), "pencil");
 		getActionMap().put("pencil", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ onChangePencil(); }
 		});
 
-		getInputMap().put(KeyStroke.getKeyStroke("1"), "c0");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("1"), "c0");
 		getActionMap().put("c0", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ colorChooser.setCurrentColor(0); }
 		});
 
-		getInputMap().put(KeyStroke.getKeyStroke("2"), "c1");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("2"), "c1");
 		getActionMap().put("c1", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ colorChooser.setCurrentColor(1); }
 		});
 
-		getInputMap().put(KeyStroke.getKeyStroke("3"), "c2");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("3"), "c2");
 		getActionMap().put("c2", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ colorChooser.setCurrentColor(2); }
 		});
 
-		getInputMap().put(KeyStroke.getKeyStroke("4"), "c3");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("4"), "c3");
 		getActionMap().put("c3", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ colorChooser.setCurrentColor(3); }
 		});
-	}
+	} 
 
 	private void setUpButtons(){
 		JButton button = new JButton("Change color");
