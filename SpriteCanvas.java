@@ -280,7 +280,7 @@ public class SpriteCanvas extends JPanel{
 	}
 
 	private void resizeCanvas(){
-		if(canvas.getWidth()/2 == getWidth()) return;
+		if(canvas.getWidth()/2 == getWidth() && getWidth() == getHeight()) return;
 		setSize(new Dimension(canvas.getWidth()/2, canvas.getHeight()/2));
 	}
 }
