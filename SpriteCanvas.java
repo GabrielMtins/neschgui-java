@@ -54,6 +54,12 @@ class GPaste extends GTool{
 			int sprite_x = current_x*2/canvas.getWidth();
 			int sprite_y = current_y*2/canvas.getHeight();
 
+			if(sprite_x < 0) sprite_x = 0;
+			if(sprite_y < 0) sprite_y = 0;
+
+			if(sprite_x > 2) sprite_x = 3;
+			if(sprite_y > 2) sprite_y = 3;
+
 			for(int j = 0; j < 8; j++){
 				for(int i = 0; i < 8; i++){
 					int current_color = Character.getNumericValue(to_copy.charAt(j*8+i));
