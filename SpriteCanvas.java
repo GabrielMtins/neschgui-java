@@ -63,6 +63,7 @@ class GPaste extends GTool{
 			}
 			
 			c.setCurrentColor(before_color);
+			setMouseState(false);
 		}
 	}
 
@@ -111,6 +112,7 @@ class GCopy extends GTool{
 			StringSelection selection = new StringSelection(to_copy);
 			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 			clipboard.setContents(selection, null);
+			setMouseState(false);
 		}
 	}
 
