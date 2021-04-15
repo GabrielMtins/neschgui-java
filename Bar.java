@@ -70,6 +70,11 @@ public class Bar extends JPanel{
 			public void actionPerformed(ActionEvent e){ onChangePencil(); }
 		});
 
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Z"), "undo");
+		getActionMap().put("undo", new AbstractAction(){
+			public void actionPerformed(ActionEvent e){ canvas.undoAction(); }
+		});
+
 		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("1"), "c0");
 		getActionMap().put("c0", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){ colorChooser.setCurrentColor(0); }
@@ -117,6 +122,13 @@ public class Bar extends JPanel{
 		button.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){ onChangePaste(); }
+		});
+		toolBar.add(button);
+
+		button = new JButton("Undo");
+		button.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){ canvas.undoAction(); }
 		});
 		toolBar.add(button);
 	}

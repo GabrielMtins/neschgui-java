@@ -70,6 +70,7 @@ class GPaste extends GTool{
 			
 			c.setCurrentColor(before_color);
 			setMouseState(false);
+			c.setActionAsLast();
 		}
 	}
 
@@ -139,14 +140,26 @@ class GCopy extends GTool{
 }
 
 class GPencil extends GTool{
+	private boolean is_mouse_on_canvas;
+
 	public GPencil(SpriteCanvas canvas){
 		super(canvas);
+		is_mouse_on_canvas = false;
 	}
 
 	@Override
 	public void update(){
 		if(getMouseState()){
 			canvas.putPixel(current_x, current_y);
+			is_mouse_on_canvas = true;
+		}
+		else if(is_mouse_on_canvas){
+			canvas.putPixel(end_x, end_y);
+
+			Canvas c = canvas.getCanvas();
+			c.setActionAsLast();
+
+			is_mouse_on_canvas = false;
 		}
 	}
 }

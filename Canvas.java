@@ -25,6 +25,26 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileFilter;
+import java.util.*;
+
+class OldState{
+	public boolean isLastAction;
+	public int selected_sprite;
+	public int x, y;
+	public int old_color;
+	
+	public OldState(int selected_sprite, int x, int y, int old_color){
+		isLastAction = false;
+		this.x = x;
+		this.y = y;
+		this.selected_sprite = selected_sprite;
+		this.old_color = old_color;
+	}
+
+	public void setActionAsLast(){
+		isLastAction = true;
+	}
+}
 
 public class Canvas extends JPanel{
 	private Rom rom;
@@ -47,9 +67,13 @@ public class Canvas extends JPanel{
 
 	private Timer timer;
 
+	private LinkedList<OldState> old_state_list;
+
 	public Canvas(int w, int h){
 		internal_width = w;
 		internal_height = h;
+
+		old_state_list = new LinkedList<OldState>();
 
 		addMouseListener(new input());
 
@@ -160,12 +184,61 @@ public class Canvas extends JPanel{
 	}
 
 	public void putPixelOnCurrentSprite(int x, int y){
+		/* We need to calculate this offset because a sprite is composed
+		 * of 4 minor sprites, so we divide by x and y by sprite_size.
+		 * For example, if x = 10, y = 0, the offset will be 1 */
+
 		int offset = x/sprite_size + (int)(y/sprite_size)*num_of_sprite;
 
-		if(x >= sprite_size) x -= sprite_size;
-		if(y >= sprite_size) y -= sprite_size;
+		int old_color = rom.getPixel(x % sprite_size, y % sprite_size, selected_sprite + offset);
 
-		rom.putPixel(x, y, selected_sprite + offset, current_color);
+		old_state_list.addLast(new OldState(selected_sprite, x, y, old_color));
+
+		rom.putPixel(x % sprite_size, y % sprite_size, selected_sprite + offset, current_color);
+		repaint();
+	}
+
+	private boolean reverseAction(){
+		try{
+			boolean ret_value;
+
+			OldState state = old_state_list.getLast();
+			ret_value = state.isLastAction;
+
+			int old_color = current_color;
+			current_color = state.old_color;
+
+			int old_selected_sprite = selected_sprite;
+
+			selected_sprite = state.selected_sprite;
+			old_state_list.removeLast();
+
+			putPixelOnCurrentSprite(state.x, state.y);
+
+			selected_sprite = old_selected_sprite;
+			current_color = old_color;
+
+			old_state_list.removeLast();
+
+			return ret_value;
+		}
+		catch(Exception e){
+			return true;
+		}
+	}
+	
+	public void setActionAsLast(){
+		try{
+			old_state_list.getLast().setActionAsLast();
+		}
+		catch(Exception e){
+		}
+	}
+
+	public void undoAction(){
+		reverseAction();
+		while(!reverseAction()){
+		}
 		repaint();
 	}
 
