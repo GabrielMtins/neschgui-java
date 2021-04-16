@@ -49,6 +49,9 @@ class GPaste extends GTool{
 
 			if(to_copy == null || to_copy.length() < 64) return;
 
+			/* since the current color is going to be changed, we need to save
+			 * its value before the operation */
+
 			int before_color = c.getCurrentColorID();
 
 			int sprite_x = current_x*2/canvas.getWidth();
@@ -76,6 +79,8 @@ class GPaste extends GTool{
 
 	@Override
 	public void render(Graphics g){
+		// we just render a blue transparent color
+
 		int width = canvas.getWidth();
 		int height = canvas.getHeight();
 
@@ -110,6 +115,10 @@ class GCopy extends GTool{
 			if(sprite_x > 2) sprite_x = 3;
 			if(sprite_y > 2) sprite_y = 3;
 
+			/* to copy into the clipboard, the program creates an string which contains
+			 * the id of the current color. After that, it can be read when we paste
+			 * a sprite. */
+
 			for(int j = 0; j < 8; j++){
 				for(int i = 0; i < 8; i++){
 					to_copy += c.getColorFromCurrentSprite(i + sprite_x*8, j + sprite_y*8);
@@ -125,6 +134,8 @@ class GCopy extends GTool{
 
 	@Override
 	public void render(Graphics g){
+		// we just render a green transparent color
+
 		int width = canvas.getWidth();
 		int height = canvas.getHeight();
 
@@ -157,6 +168,7 @@ class GPencil extends GTool{
 			canvas.putPixel(end_x, end_y);
 
 			Canvas c = canvas.getCanvas();
+			// we set the action as last because the canvas needs to know when it's the last action
 			c.setActionAsLast();
 
 			is_mouse_on_canvas = false;

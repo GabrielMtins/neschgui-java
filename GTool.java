@@ -24,6 +24,11 @@ import java.lang.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/* this is a generic tool from which all tools inherent from
+ * it has the initial position of the mouse when it was pressed,
+ * the current position of the mouse and 
+ * the position where mouse was released */
+
 public class GTool{
 	SpriteCanvas canvas;
 

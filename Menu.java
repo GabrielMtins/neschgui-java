@@ -23,6 +23,8 @@ import java.lang.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+// this file contains top menu bar that there's in the program
+
 public class Menu extends JMenuBar{
 	Canvas canvas;
 

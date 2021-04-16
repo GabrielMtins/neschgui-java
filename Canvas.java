@@ -27,6 +27,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileFilter;
 import java.util.*;
 
+/* this class contains the informations about the old state of a pixel.
+ * it is used to undo an action */
+
 class OldState{
 	public boolean isLastAction;
 	public int selected_sprite;
@@ -127,18 +130,18 @@ public class Canvas extends JPanel{
 	}
 
 	public void loadRom(){
-		selected_sprite_x = 0;
-		selected_sprite_y = 0;
-		selected_sprite_offset = 0;
-		selected_sprite = 0;
-
 		JFileChooser chooser = new JFileChooser();
 		int return_val = chooser.showOpenDialog(this);
 
 		if(return_val == JFileChooser.APPROVE_OPTION){
 			rom = new Rom(chooser.getSelectedFile().getAbsolutePath());
 			scroll.setValue(0);
+			selected_sprite_x = 0;
+			selected_sprite_y = 0;
+			selected_sprite_offset = 0;
+			selected_sprite = 0;
 		}
+
 		repaint();
 	}
 

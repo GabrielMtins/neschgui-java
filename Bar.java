@@ -16,6 +16,8 @@
     along with Neschgui.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+// this files contains the toolbar that there's in the bottom of the program
+
 import javax.swing.*;
 import java.awt.*;
 import java.lang.*;
