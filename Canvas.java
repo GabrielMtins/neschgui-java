@@ -159,6 +159,19 @@ public class Canvas extends JPanel{
 		repaint();
 	}
 
+	public Color getColorPalette(int index){
+		return palette[index];
+	}
+
+	public int getColorFromCurrentSprite(int x, int y){
+		int offset = x/sprite_size + (int)(y/sprite_size)*num_of_sprite + selected_sprite;
+
+		if(x >= sprite_size) x -= sprite_size;
+		if(y >= sprite_size) y -= sprite_size;
+
+		return rom.getPixel(x, y, offset);
+	}
+
 	public void selectSprite(int x, int y){
 		int width = getWidth();
 		int height = getHeight();
@@ -239,20 +252,8 @@ public class Canvas extends JPanel{
 		reverseAction();
 		while(!reverseAction()){
 		}
+		setActionAsLast();
 		repaint();
-	}
-
-	public Color getColorPalette(int index){
-		return palette[index];
-	}
-
-	public int getColorFromCurrentSprite(int x, int y){
-		int offset = x/sprite_size + (int)(y/sprite_size)*num_of_sprite + selected_sprite;
-
-		if(x >= sprite_size) x -= sprite_size;
-		if(y >= sprite_size) y -= sprite_size;
-
-		return rom.getPixel(x, y, offset);
 	}
 
 	private int getCurrentOffset(){
