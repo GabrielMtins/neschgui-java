@@ -66,8 +66,7 @@ public class Rom{
 		 * byte 0: 00001010
 		 * byte 8: 00001100
 		 * in this case, the color of (0, 0) is 0, the color of (4, 0) is going to be 4,
-		 * the color of (5, 0) will be 1, and the color of (6, 0) will be 2
-		*/
+		 * the color of (5, 0) will be 1, and the color of (6, 0) will be 2 */
 
 		if(offset*16 + y + 8 > getSize()) return 0;
 

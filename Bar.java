@@ -40,7 +40,6 @@ public class Bar extends JPanel{
 		if(color != null){
 			canvas.changeCurrentColor(color);
 			colorChooser.repaint();
-			canvas.repaint();
 		}
 	}
 

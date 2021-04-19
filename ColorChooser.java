@@ -86,6 +86,7 @@ public class ColorChooser extends JPanel{
 		@Override
 		public void mousePressed(MouseEvent e){
 			setCurrentColor(e.getX() / getHeight());
+			repaint();
 		}
 
 		@Override
