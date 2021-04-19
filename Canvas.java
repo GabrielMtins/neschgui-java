@@ -208,6 +208,8 @@ public class Canvas extends JPanel{
 
 		int old_color = rom.getPixel(x % sprite_size, y % sprite_size, selected_sprite + offset);
 
+		while(old_state_list.size() > 0xffff) old_state_list.removeFirst();
+
 		old_state_list.addLast(new OldState(selected_sprite, x, y, old_color));
 
 		rom.putPixel(x % sprite_size, y % sprite_size, selected_sprite + offset, current_color);
